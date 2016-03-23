@@ -4,6 +4,7 @@ package com.xyrality.model;
 /**
  * Created by Oleksandr Skoryi on 23.03.16.
  */
+
 public class LotteryEvaluator {
 
     private static LotteryEvaluator lotteryEvaluator;
@@ -13,6 +14,12 @@ public class LotteryEvaluator {
         this.winningCombination = winningCombination;
     }
 
+    /**
+     * Singleton realisation
+     *
+     * @param winningCombination - winning combination from command line param
+     * @return unique instance of LotteryEvaluator
+     */
     public static LotteryEvaluator getInstance(String winningCombination) {
         if (lotteryEvaluator == null) {
             lotteryEvaluator = new LotteryEvaluator(winningCombination);
@@ -20,10 +27,22 @@ public class LotteryEvaluator {
         return lotteryEvaluator;
     }
 
+    /**
+     * Method calculates winning points for all player's combinations
+     *
+     * @param player player to evaluate
+     * @return sum of winning points for all player's combinations
+     */
     public int evaluatePlayer(Player player) {
         return player.getLotteryCombinations().stream().mapToInt(this::evaluateCombination).sum();
     }
 
+    /**
+     * Method evaluates one player combination using dynamic programming. Method based on dynamic matrix building.
+     *
+     * @param combination one player combination
+     * @return evaluated value
+     */
     private int evaluateCombination(String combination) {
         int[][] matrix = new int[winningCombination.length() + 1][combination.length() + 1];
         for (int x = 1; x < matrix.length; x++) {
@@ -38,6 +57,11 @@ public class LotteryEvaluator {
         return matrix[matrix.length - 1][matrix[0].length - 1];
     }
 
+    /**
+     * Helper method for debug purposes, just print matrix
+     *
+     * @param matrix matrix for printing
+     */
     private static void printMatrix(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
