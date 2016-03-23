@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Oleksandr Skoryi on 23.03.16.
+ * jUnit tests
+ *
+ * @author Oleksandr Skoryi
  */
 public class LotteryEvaluatorTest {
 

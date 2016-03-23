@@ -2,7 +2,9 @@ package com.xyrality.model;
 
 
 /**
- * Created by Oleksandr Skoryi on 23.03.16.
+ * Singleton class for lottery evaluator. Provide only one instance of evaluator in system
+ *
+ * @author Oleksandr Skoryi
  */
 
 public class LotteryEvaluator {

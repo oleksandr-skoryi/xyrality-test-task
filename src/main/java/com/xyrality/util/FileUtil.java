@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Created by Oleksandr Skoryi on 22.03.16.
+ * Util class for I/O operations
+ *
+ * @author Oleksandr Skoryi
  */
 public class FileUtil {
 

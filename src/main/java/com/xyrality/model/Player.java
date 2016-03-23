@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Oleksandr Skoryi on 22.03.16.
+ * Player model
+ *
+ * @author Oleksandr Skoryi
  */
 public class Player {
 

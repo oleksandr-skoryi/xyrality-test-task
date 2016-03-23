@@ -7,7 +7,9 @@ import com.xyrality.util.FileUtil;
 import java.util.List;
 
 /**
- * Created by Oleksandr Skoryi on 22.03.16.
+ * Main Class
+ *
+ * @author Oleksandr Skoryi
  */
 public class Driver {
 
