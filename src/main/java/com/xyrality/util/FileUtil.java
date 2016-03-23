@@ -23,7 +23,6 @@ public class FileUtil {
                 putValueInMap(helpersMap, currentLine);
             }
             players.addAll(helpersMap.entrySet().stream().map(FileUtil::getPlayerFromEntry).collect(Collectors.toList()));
-            System.out.println(helpersMap);
         } catch (FileNotFoundException ex) {
             System.out.println("File " + filename + " not found");
         } catch (IOException ex) {

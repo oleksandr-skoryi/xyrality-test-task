@@ -21,11 +21,9 @@ public class LotteryEvaluator {
         return lotteryEvaluator;
     }
 
-    public void evaluatePlayer(Player player) {
+    public int evaluatePlayer(Player player) {
         List<String> lotteryCombinations = player.getLotteryCombinations();
-        for (String combination : lotteryCombinations) {
-            player.increasePoints(evaluateCombination(combination));
-        }
+        return lotteryCombinations.stream().mapToInt(this::evaluateCombination).sum();
     }
 
     private int evaluateCombination(String combination) {

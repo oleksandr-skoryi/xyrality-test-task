@@ -18,7 +18,7 @@ public class Driver {
             String winningCombination = args[2];
             LotteryEvaluator evaluator = LotteryEvaluator.getInstance(winningCombination);
             List<Player> players = FileUtil.readFile(inputFile);
-            players.stream().forEach(evaluator::evaluatePlayer);
+            players.stream().forEach(item -> item.increasePoints(evaluator.evaluatePlayer(item)));
             FileUtil.writeFile(outputFile, players);
         } else {
             System.out.println("Please provide three command line params <input file name> <output file name> <winning combination>");
