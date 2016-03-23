@@ -1,6 +1,8 @@
 package com.xyrality.model;
 
 
+import com.xyrality.util.LotteryEvaluatorUtil;
+
 /**
  * Singleton class for lottery evaluator. Provide only one instance of evaluator in system
  *
@@ -56,29 +58,9 @@ public class LotteryEvaluator {
                     matrix[1][y] = Math.max(matrix[1][y - 1], matrix[0][y]);
                 }
             }
-            shiftMatrix(matrix);
+            LotteryEvaluatorUtil.shiftMatrix(matrix);
             xCounter++;
         }
         return matrix[matrix.length - 1][matrix[0].length - 1];
-    }
-
-    private static void shiftMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix[0].length; i++) {
-            matrix[0][i] = matrix[1][i];
-        }
-    }
-
-    /**
-     * Helper method for debug purposes, just print matrix
-     *
-     * @param matrix matrix for printing
-     */
-    private static void printMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
     }
 }
