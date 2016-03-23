@@ -46,17 +46,26 @@ public class LotteryEvaluator {
      * @return evaluated value
      */
     private int evaluateCombination(String combination) {
-        int[][] matrix = new int[winningCombination.length() + 1][combination.length() + 1];
-        for (int x = 1; x < matrix.length; x++) {
-            for (int y = 1; y < matrix[x].length; y++) {
-                if (winningCombination.charAt(x - 1) == combination.charAt(y - 1)) {
-                    matrix[x][y] = matrix[x - 1][y - 1] + 1;
+        int[][] matrix = new int[2][combination.length() + 1];
+        int xCounter = 1;
+        while (xCounter < winningCombination.length() + 1) {
+            for (int y = 1; y < matrix[0].length; y++) {
+                if (winningCombination.charAt(xCounter - 1) == combination.charAt(y - 1)) {
+                    matrix[1][y] = matrix[0][y - 1] + 1;
                 } else {
-                    matrix[x][y] = Math.max(matrix[x][y - 1], matrix[x - 1][y]);
+                    matrix[1][y] = Math.max(matrix[1][y - 1], matrix[0][y]);
                 }
             }
+            shiftMatrix(matrix);
+            xCounter++;
         }
         return matrix[matrix.length - 1][matrix[0].length - 1];
+    }
+
+    private static void shiftMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix[0].length; i++) {
+            matrix[0][i] = matrix[1][i];
+        }
     }
 
     /**
