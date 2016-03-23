@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Oleksandr Skoryi
  */
-public class Player {
+public class Player implements Comparable<Player> {
 
     private String lastName;
     private String firstName;
@@ -21,6 +21,10 @@ public class Player {
         this.firstName = firstName;
         this.country = country;
         this.lotteryCombinations = lotteryCombinations;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     /**
@@ -60,5 +64,16 @@ public class Player {
                 ", lotteryCombinations=" + lotteryCombinations +
                 ", points=" + points +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Player player) {
+        if (!this.lastName.equals(player.lastName)) {
+            return this.lastName.compareTo(player.lastName);
+        }
+        if (!this.firstName.equals(player.firstName)) {
+            return this.firstName.compareTo(player.firstName);
+        }
+        return this.country.compareTo(player.country);
     }
 }
