@@ -22,7 +22,7 @@ public class Player {
     }
 
     public String toFileFormat() {
-        return firstName + "," + lastName + "," + country + "," + points;
+        return lastName + "," + firstName + "," + country + "," + points;
     }
 
     public List<String> getLotteryCombinations() {
@@ -31,6 +31,10 @@ public class Player {
 
     public void increasePoints(int value) {
         this.points += value;
+    }
+
+    public int getPoints() {
+        return points;
     }
 
     @Override
