@@ -17,12 +17,13 @@ import java.util.stream.Collectors;
 public class FileUtil {
 
     /**
-     * Method reads input file and convert file content to list of players
+     * Method reads input file and convert file content to list of players. If file doesn't exist, there is no
+     * reason to proceed the work of program
      *
      * @param filename input file name
      * @return data converted to list of players
      */
-    public static List<Player> readFile(String filename) {
+    public static List<Player> readFile(String filename) throws IOException {
         List<Player> players = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             Map<String, List<String>> helpersMap = new HashMap<>();
@@ -32,9 +33,9 @@ public class FileUtil {
             }
             players.addAll(helpersMap.entrySet().stream().map(FileUtil::getPlayerFromEntry).collect(Collectors.toList()));
         } catch (FileNotFoundException ex) {
-            System.out.println("File " + filename + " not found");
+            throw new FileNotFoundException("File " + filename + " not found");
         } catch (IOException ex) {
-            System.out.println("File " + filename + " has error during reading");
+            throw new IOException("File " + filename + " has error during reading");
         }
         return players;
     }
