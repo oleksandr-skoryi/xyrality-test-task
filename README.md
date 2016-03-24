@@ -3,7 +3,7 @@
 ## How to execute
 
 ```
-git clone git@github.com:AlexFaster/XyralityTestTask.git
+git clone https://github.com/AlexFaster/XyralityTestTask.git
 ```
 ```
 cd $PROJECT_ROOT_DIRECTORY/Compiled\ jar\ and\ input\ file/
