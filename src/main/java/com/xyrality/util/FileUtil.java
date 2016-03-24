@@ -39,16 +39,6 @@ public class FileUtil {
         return players;
     }
 
-    public static void writeFile(String filename, List<Player> players) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
-            for (Player player : players) {
-                bw.write(player.toFileFormat() + System.getProperty("line.separator"));
-            }
-        } catch (IOException ex) {
-            System.out.println("File " + filename + " has error during writing");
-        }
-    }
-
     /**
      * Method for creation Player from entry
      *

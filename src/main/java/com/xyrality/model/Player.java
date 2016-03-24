@@ -28,15 +28,6 @@ public class Player implements Comparable<Player> {
     }
 
     /**
-     * Convert object to file format. Can be moved into util class, but it is OK to leave it here
-     *
-     * @return object for file writing.
-     */
-    public String toFileFormat() {
-        return lastName + "," + firstName + "," + country + "," + points;
-    }
-
-    /**
      * Best practice doesn't recommend to get list from object, because you can still add, remove and do whatever
      * you want with list, therefore need to return copy of list which contains lottery combinations
      *
@@ -57,13 +48,7 @@ public class Player implements Comparable<Player> {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", country='" + country + '\'' +
-                ", lotteryCombinations=" + lotteryCombinations +
-                ", points=" + points +
-                '}';
+        return lastName + "," + firstName + "," + country + "," + points;
     }
 
     @Override

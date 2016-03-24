@@ -5,7 +5,6 @@ import com.xyrality.model.Player;
 import com.xyrality.util.FileUtil;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Main Class
@@ -15,17 +14,17 @@ import java.util.stream.Collectors;
 public class Driver {
 
     public static void main(String[] args) {
-        if (args.length == 3) {
+        if (args.length == 2) {
             String inputFile = args[0];
-            String outputFile = args[1];
-            String winningCombination = args[2];
+            String winningCombination = args[1];
             LotteryEvaluator evaluator = LotteryEvaluator.getInstance(winningCombination);
             List<Player> players = FileUtil.readFile(inputFile);
             players.stream().forEach(item -> item.increasePoints(evaluator.evaluatePlayer(item)));
-            players = players.stream().filter(item -> item.getPoints() != 0).sorted().collect(Collectors.toList());
-            FileUtil.writeFile(outputFile, players);
+            players.stream().filter(item -> item.getPoints() != 0).sorted().forEach(
+                    System.out::println
+            );
         } else {
-            System.out.println("Please provide three command line params <input file name> <output file name> <winning combination>");
+            System.out.println("Please provide two command line params <input file name> <winning combination>");
         }
     }
 }
