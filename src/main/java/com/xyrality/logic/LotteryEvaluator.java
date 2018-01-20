@@ -13,6 +13,7 @@ import com.xyrality.util.LotteryEvaluatorUtil;
 public class LotteryEvaluator {
 
     private static LotteryEvaluator lotteryEvaluator;
+
     private final String winningCombination;
 
     private LotteryEvaluator(final String winningCombination) {
@@ -22,7 +23,7 @@ public class LotteryEvaluator {
     /**
      * Singleton realisation
      *
-     * @param winningCombination - winning combination from command line param
+     * @param winningCombination - winning combination from input
      * @return unique instance of LotteryEvaluator
      */
     public static LotteryEvaluator getInstance(final String winningCombination) {
@@ -39,7 +40,10 @@ public class LotteryEvaluator {
      * @return sum of winning points for all player's combinations
      */
     public int evaluatePlayer(final Player player) {
-        return player.getLotteryCombinations().stream().mapToInt(this::evaluateCombination).sum();
+        return player.getLotteryCombinations()
+                .stream()
+                .mapToInt(this::evaluateCombination)
+                .sum();
     }
 
     /**

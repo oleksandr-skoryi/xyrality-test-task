@@ -2,15 +2,16 @@ package com.xyrality.util;
 
 import com.xyrality.model.Player;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Util class for I/O operations
@@ -28,15 +29,14 @@ public class FileUtil {
      */
     public static List<Player> readFile(final String filename) throws IOException {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try (final Stream<String> lines = Files.lines(Paths.get(filename))) {
 
             final Map<String, List<String>> helpersMap = new HashMap<>();
-            String currentLine;
-            while ((currentLine = br.readLine()) != null) {
+            lines.forEach(currentLine -> {
                 final String keyForHelpersMap = currentLine.substring(0, currentLine.lastIndexOf(","));
                 final String lotteryCombination = currentLine.substring(currentLine.lastIndexOf(",") + 1, currentLine.length());
                 helpersMap.computeIfAbsent(keyForHelpersMap, elem -> new ArrayList<>()).add(lotteryCombination);
-            }
+            });
             return helpersMap
                     .entrySet()
                     .stream()
