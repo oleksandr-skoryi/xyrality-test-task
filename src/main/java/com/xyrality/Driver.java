@@ -1,6 +1,6 @@
 package com.xyrality;
 
-import com.xyrality.model.LotteryEvaluator;
+import com.xyrality.logic.LotteryEvaluator;
 import com.xyrality.model.Player;
 import com.xyrality.util.FileUtil;
 
@@ -17,14 +17,16 @@ public class Driver {
     public static void main(String[] args) {
         if (args.length == 2) {
             try {
-                String inputFile = args[0];
-                String winningCombination = args[1];
-                LotteryEvaluator evaluator = LotteryEvaluator.getInstance(winningCombination);
-                List<Player> players = FileUtil.readFile(inputFile);
-                players.stream().forEach(item -> item.increasePoints(evaluator.evaluatePlayer(item)));
-                players.stream().filter(item -> item.getPoints() != 0).sorted().forEach(
-                        System.out::println
-                );
+                final String inputFile = args[0];
+                final String winningCombination = args[1];
+                final LotteryEvaluator evaluator = LotteryEvaluator.getInstance(winningCombination);
+                final List<Player> players = FileUtil.readFile(inputFile);
+                players.forEach(item -> item.increasePoints(evaluator.evaluatePlayer(item)));
+                players.stream().filter(item -> item.getPoints() != 0)
+                        .sorted()
+                        .forEach(
+                                System.out::println
+                        );
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
             }

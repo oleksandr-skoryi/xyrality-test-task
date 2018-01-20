@@ -1,5 +1,6 @@
 package com.xyrality.model;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +11,18 @@ import java.util.List;
  */
 public class Player implements Comparable<Player> {
 
-    private String lastName;
-    private String firstName;
-    private String country;
-    private List<String> lotteryCombinations;
+    private final String lastName;
+    private final String firstName;
+    private final String country;
+    private final List<String> lotteryCombinations;
     private int points;
 
-    public Player(String lastName, String firstName, String country, List<String> lotteryCombinations) {
+    public Player(
+            final String lastName,
+            final String firstName,
+            final String country,
+            final List<String> lotteryCombinations
+    ) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.country = country;
@@ -42,7 +48,7 @@ public class Player implements Comparable<Player> {
      *
      * @param value to set
      */
-    public void increasePoints(int value) {
+    public void increasePoints(final int value) {
         this.points += value;
     }
 
@@ -52,7 +58,7 @@ public class Player implements Comparable<Player> {
     }
 
     @Override
-    public int compareTo(Player player) {
+    public int compareTo(final @Nonnull Player player) {
         if (!this.lastName.equals(player.lastName)) {
             return this.lastName.compareTo(player.lastName);
         }

@@ -1,5 +1,6 @@
 package com.xyrality.model;
 
+import com.xyrality.logic.LotteryEvaluator;
 import org.junit.Before;
 import org.junit.Test;
 
