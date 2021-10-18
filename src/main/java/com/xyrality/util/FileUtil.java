@@ -1,15 +1,12 @@
 package com.xyrality.util;
 
 import com.xyrality.model.Player;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,6 +16,9 @@ import java.util.stream.Stream;
  * @author Oleksandr Skoryi
  */
 public class FileUtil {
+
+    private FileUtil() {
+    }
 
     /**
      * Method reads input file and convert file content to list of players. If file doesn't exist, there is no
@@ -31,17 +31,8 @@ public class FileUtil {
 
         try (final Stream<String> lines = Files.lines(Paths.get(filename))) {
 
-            final Map<String, List<String>> helpersMap = new HashMap<>();
-            lines.forEach(currentLine -> {
-                final String keyForHelpersMap = currentLine.substring(0, currentLine.lastIndexOf(","));
-                final String lotteryCombination = currentLine.substring(currentLine.lastIndexOf(",") + 1, currentLine.length());
-                helpersMap.computeIfAbsent(keyForHelpersMap, elem -> new ArrayList<>()).add(lotteryCombination);
-            });
-            return helpersMap
-                    .entrySet()
-                    .stream()
-                    .map(FileUtil::getPlayerFromEntry)
-                    .collect(Collectors.toList());
+            return lines.map(FileUtil::parsePlayer)
+                .collect(Collectors.toList());
 
         } catch (FileNotFoundException ex) {
             throw new FileNotFoundException("File " + filename + " not found");
@@ -53,12 +44,12 @@ public class FileUtil {
     /**
      * Method for creation Player from entry
      *
-     * @param entry map entry
+     * @param line - line from file
      * @return parsed Player from entry
      */
-    private static Player getPlayerFromEntry(final Map.Entry<String, List<String>> entry) {
-        final String[] playerProps = entry.getKey().split(",");
-        final List<String> lotteryCombinations = entry.getValue();
+    private static Player parsePlayer(final String line) {
+        final String[] playerProps = line.split(",");
+        final String[] lotteryCombinations = Arrays.copyOfRange(playerProps, 3, playerProps.length);
         return new Player(playerProps[0], playerProps[1], playerProps[2], lotteryCombinations);
     }
 

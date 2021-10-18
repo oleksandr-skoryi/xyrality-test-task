@@ -7,6 +7,8 @@ package com.xyrality.util;
  */
 public class LotteryEvaluatorUtil {
 
+    private LotteryEvaluatorUtil() {}
+
     /**
      * Shift line to up
      *

@@ -1,8 +1,6 @@
 package com.xyrality.model;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * Player model
@@ -14,14 +12,14 @@ public class Player implements Comparable<Player> {
     private final String lastName;
     private final String firstName;
     private final String country;
-    private final List<String> lotteryCombinations;
+    private final String[] lotteryCombinations;
     private int points;
 
     public Player(
             final String lastName,
             final String firstName,
             final String country,
-            final List<String> lotteryCombinations
+            final String[] lotteryCombinations
     ) {
         this.lastName = lastName;
         this.firstName = firstName;
@@ -34,13 +32,11 @@ public class Player implements Comparable<Player> {
     }
 
     /**
-     * Best practice doesn't recommend to get list from object, because you can still add, remove and do whatever
-     * you want with list, therefore need to return copy of list which contains lottery combinations
      *
      * @return copy of lottery combination list
      */
-    public List<String> getLotteryCombinations() {
-        return new ArrayList<>(lotteryCombinations);
+    public String[] getLotteryCombinations() {
+        return Arrays.copyOf(lotteryCombinations, lotteryCombinations.length);
     }
 
     /**
@@ -58,7 +54,7 @@ public class Player implements Comparable<Player> {
     }
 
     @Override
-    public int compareTo(final @Nonnull Player player) {
+    public int compareTo(final Player player) {
         if (!this.lastName.equals(player.lastName)) {
             return this.lastName.compareTo(player.lastName);
         }
